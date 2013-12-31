@@ -1,0 +1,4 @@
+repo: ~/my/path/to/the/chef/repo
+blacklist:
+  - local_cookbook
+  - another_local_cookbook
