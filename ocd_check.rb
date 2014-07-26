@@ -1,8 +1,8 @@
 #!/usr/bin/ruby
 # encoding: UTF-8
 
-# ocd_check.rb: Obsessive Cookbook Disorder Check: Simple app to check the cookbooks in your
-#               local repo against the versions on the Chef community site.  It will return
+# ocd_check.rb: Obsessive Cookbook Disorder Check: Simple script to check the cookbooks in your
+#               local repo against the versions on the Opscode community site.  It will return
 #               false positives if your cookbooks have the same name as community cookbook site
 #               cookbooks.
 

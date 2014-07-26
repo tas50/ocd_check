@@ -43,7 +43,7 @@ class OCDConfig
   # loop through the array of config files so that CLI override is 1st, local dir is 2nd, and ~/.chef is last
   def load_config_file
     $opts[:config].each do |config|
-      if File.exists?(File.expand_path(config))
+      if File.exist?(File.expand_path(config))
         full_path = File.expand_path(config)
         return YAML.load(File.open(full_path))
       end
@@ -53,5 +53,4 @@ class OCDConfig
     puts 'No ocd_check config found.  Using command line arguments only'
     nil
   end
-
 end

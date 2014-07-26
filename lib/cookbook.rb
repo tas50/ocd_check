@@ -10,7 +10,6 @@ rescue LoadError => e
 end
 
 class CookbookCheck
-
   def initialize(config)
     @result = {}
     @config = config
@@ -38,7 +37,7 @@ class CookbookCheck
   # lookup a single local cookbooks version
   def cb_local_lookup(cb_name)
     full_path = File.expand_path("#{@config['cookbook_path']}/#{cb_name}")
-    if File.exists?("#{full_path}/metadata.rb")
+    if File.exist?("#{full_path}/metadata.rb")
       version = (`grep '^version' #{full_path}/metadata.rb`)
     else
       return -1
@@ -53,15 +52,14 @@ class CookbookCheck
 
   # lookup a single community cookbook site cookbook version
   def cb_remote_lookup(cb_name)
-    url = "http://cookbooks.opscode.com/api/v1/cookbooks/#{cb_name}"
+    url = "https://supermarket.getchef.com/api/v1/cookbooks/#{cb_name}/versions/latest"
     resp = Net::HTTP.get_response(URI.parse(url))
 
     if resp.code == '404'
       return nil
     else
       par_resp = JSON.parse(resp.body)
-      version = par_resp['latest_version'].split('/').last.gsub!('_', '.')
-      return version
+      return par_resp['version']
     end
   end
 
@@ -76,5 +74,4 @@ class CookbookCheck
     end
     cookbooks
   end
-
 end
